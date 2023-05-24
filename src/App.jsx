@@ -1,6 +1,7 @@
 import List from "./List";
 import Search from "./Search";
 import { useState, useEffect } from "react";
+import useStorageState from "./Hooks/UseStorageState";
 
 function App() {
   const stories = [
@@ -22,13 +23,7 @@ function App() {
     },
   ];
 
-  const [searchTerm, setSearchTerm] = useState(
-    localStorage.getItem("search") || ""
-  );
-
-  useEffect(() => {
-    localStorage.setItem("search", searchTerm);
-  }, [searchTerm]);
+  const [searchTerm, setSearchTerm] = useStorageState("search", "");
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
