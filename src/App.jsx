@@ -1,6 +1,5 @@
 import List from "./List";
-import Search from "./Search";
-import { useState, useEffect } from "react";
+import InputWithLabel from "./InputWithLabel";
 import useStorageState from "./Hooks/UseStorageState";
 
 function App() {
@@ -37,7 +36,13 @@ function App() {
     <>
       <h1>My Hacker Stories</h1>
 
-      <Search onSearch={handleSearch} term={searchTerm} />
+      <InputWithLabel
+        id="search"
+        label="Search"
+        value={searchTerm}
+        type="text"
+        onInputChange={handleSearch}
+      />
 
       <hr />
 
