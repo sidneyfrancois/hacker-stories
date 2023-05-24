@@ -1,19 +1,16 @@
 import { useState } from "react";
 
-function Search() {
-  const [searchTerm, setSearchTerm] = useState("");
-
+function Search({ onSearch, term }) {
   const handleChange = (event) => {
-    setSearchTerm(event.target.value);
+    onSearch(event);
   };
 
   return (
     <>
       <label htmlFor="search">Search: </label>
       <input id="search" type="text" onChange={handleChange} />
-
       <p>
-        Searching for <strong>{searchTerm}</strong>
+        The search term is: <strong>{term}</strong>
       </p>
     </>
   );

@@ -1,6 +1,7 @@
 import * as React from "react";
 import List from "./List";
 import Search from "./Search";
+import { useState } from "react";
 
 function App() {
   const stories = [
@@ -22,11 +23,17 @@ function App() {
     },
   ];
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   return (
     <>
       <h1>My Hacker Stories</h1>
 
-      <Search />
+      <Search onSearch={handleSearch} term={searchTerm} />
 
       <hr />
 
