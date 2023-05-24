@@ -1,11 +1,11 @@
 import * as React from "react";
 import Item from "./Item";
 
-function List(props) {
+function List({ stories }) {
   return (
     <ul>
-      {props.list.map((item) => {
-        return <Item key={item.objectID} item={item} />;
+      {stories.map(({ objectID, ...item }) => {
+        return <Item key={objectID} {...item} />;
       })}
     </ul>
   );

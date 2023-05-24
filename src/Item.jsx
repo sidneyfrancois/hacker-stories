@@ -1,14 +1,14 @@
 import * as React from "react";
 
-function Item(props) {
+function Item({ title, url, author, num_comments, points }) {
   return (
-    <li key={props.item.objectID}>
+    <li>
       <span>
-        <a href={props.item.url}>{props.item.title}</a>
+        <a href={url}>{title}</a>
       </span>
-      <span>{props.item.author}</span>
-      <span>{props.item.num_comments}</span>
-      <span>{props.item.points}</span>
+      <span>{author}</span>
+      <span>{num_comments}</span>
+      <span>{points}</span>
     </li>
   );
 }

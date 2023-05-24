@@ -41,7 +41,7 @@ function App() {
 
       <hr />
 
-      <List list={searchedStories} />
+      <List stories={searchedStories} />
     </>
   );
 }
