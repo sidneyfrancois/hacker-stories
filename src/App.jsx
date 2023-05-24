@@ -29,6 +29,10 @@ function App() {
     setSearchTerm(event.target.value);
   };
 
+  const searchedStories = stories.filter((story) =>
+    story.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
       <h1>My Hacker Stories</h1>
@@ -37,7 +41,7 @@ function App() {
 
       <hr />
 
-      <List list={stories} />
+      <List list={searchedStories} />
     </>
   );
 }
