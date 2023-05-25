@@ -42,6 +42,7 @@ function App() {
         type="text"
         onInputChange={handleSearch}
         children
+        isFocused
       >
         <strong>Search:</strong>
       </InputWithLabel>
