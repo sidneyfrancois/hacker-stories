@@ -1,7 +1,7 @@
 import List from "./List";
 import InputWithLabel from "./InputWithLabel";
 import useStorageState from "./Hooks/UseStorageState";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const initialStories = [
   {
@@ -22,9 +22,28 @@ const initialStories = [
   },
 ];
 
+// const getAsyncStories = () => {
+//   new Promise(
+//     (resolve) =>
+//       setTimeout(() => resolve({ data: { stories: initialStories } })),
+//     2000
+//   );
+// };
+
+const getAsyncStories = () =>
+  new Promise((resolve) =>
+    setTimeout(() => resolve({ data: { stories: initialStories } }), 2000)
+  );
+
 function App() {
   const [searchTerm, setSearchTerm] = useStorageState("search", "");
-  const [stories, setStories] = useState(initialStories);
+  const [stories, setStories] = useState([]);
+
+  useEffect(() => {
+    getAsyncStories().then((result) => {
+      setStories(result.data.stories);
+    });
+  }, []);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
