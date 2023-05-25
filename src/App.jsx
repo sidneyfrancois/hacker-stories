@@ -2,6 +2,7 @@ import List from "./List";
 import InputWithLabel from "./InputWithLabel";
 import useStorageState from "./Hooks/UseStorageState";
 import { useEffect, useState, useReducer, useCallback } from "react";
+import axios from "axios";
 
 const API_ENDPOINT = "https://hn.algolia.com/api/v1/search?query=";
 
@@ -50,17 +51,15 @@ function App() {
   const handleFetchStories = useCallback(() => {
     dispatchStories({ type: "STORIES_FETCH_INIT" });
 
-    fetch(url)
-      .then((response) => response.json())
+    axios
+      .get(url)
       .then((result) => {
         dispatchStories({
           type: "STORIES_FETCH_SUCCESS",
-          payload: result.hits,
+          payload: result.data.hits,
         });
       })
-      .catch(() => {
-        dispatchStories({ type: "STORIES_FETCH_FAILURE" });
-      });
+      .catch(() => dispatchStories({ type: "STORIES_FETCH_FAILURE" }));
   }, [url]);
 
   useEffect(() => {
