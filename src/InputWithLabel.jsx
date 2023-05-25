@@ -1,9 +1,9 @@
-function InputWithLabel({ id, label, value, type, onInputChange }) {
+function InputWithLabel({ id, value, type, onInputChange, children }) {
   return (
     <>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id}>{children}</label>
       &nbsp;
-      <input id={id} type={type} onChange={onInputChange} value={value} />
+      <input id={id} type={type} value={value} onChange={onInputChange} />
     </>
   );
 }

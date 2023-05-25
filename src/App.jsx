@@ -38,11 +38,13 @@ function App() {
 
       <InputWithLabel
         id="search"
-        label="Search"
         value={searchTerm}
         type="text"
         onInputChange={handleSearch}
-      />
+        children
+      >
+        <strong>Search:</strong>
+      </InputWithLabel>
 
       <hr />
 
