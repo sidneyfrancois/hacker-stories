@@ -79,10 +79,6 @@ function App() {
     });
   };
 
-  const searchedStories = stories.data.filter((story) =>
-    story.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   return (
     <>
       <h1>My Hacker Stories</h1>
