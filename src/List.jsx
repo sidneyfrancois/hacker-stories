@@ -1,11 +1,13 @@
 import * as React from "react";
 import Item from "./Item";
 
-function List({ stories }) {
+function List({ stories, onRemoveItem }) {
   return (
     <ul>
-      {stories.map(({ objectID, ...item }) => {
-        return <Item key={objectID} {...item} />;
+      {stories.map((item) => {
+        return (
+          <Item key={item.objectID} item={item} onRemoveItem={onRemoveItem} />
+        );
       })}
     </ul>
   );

@@ -1,14 +1,19 @@
 import * as React from "react";
 
-function Item({ title, url, author, num_comments, points }) {
+function Item({ item, onRemoveItem }) {
   return (
     <li>
       <span>
-        <a href={url}>{title}</a>
+        <a href={item.url}>{item.title}</a>
       </span>
-      <span>{author}</span>
-      <span>{num_comments}</span>
-      <span>{points}</span>
+      <span>{item.author}</span>
+      <span>{item.num_comments}</span>
+      <span>{item.points}</span>
+      <span>
+        <button type="button" onClick={() => onRemoveItem(item)}>
+          Dismiss
+        </button>
+      </span>
     </li>
   );
 }
