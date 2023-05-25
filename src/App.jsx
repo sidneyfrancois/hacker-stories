@@ -1,7 +1,7 @@
 import List from "./List";
 import InputWithLabel from "./InputWithLabel";
 import useStorageState from "./Hooks/UseStorageState";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 
 const initialStories = [
   {
@@ -27,9 +27,17 @@ const getAsyncStories = () =>
     setTimeout(() => resolve({ data: { stories: initialStories } }), 2000)
   );
 
+const storiesReducer = (state, action) => {
+  if (action.type == "SET_STORIES") {
+    return action.payload;
+  } else {
+    throw new Error();
+  }
+};
+
 function App() {
   const [searchTerm, setSearchTerm] = useStorageState("search", "");
-  const [stories, setStories] = useState([]);
+  const [stories, dispatchStories] = useReducer(storiesReducer, []);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -38,7 +46,7 @@ function App() {
 
     getAsyncStories()
       .then((result) => {
-        setStories(result.data.stories);
+        dispatchStories({ type: "SET_STORIES", payload: result.data.stories });
         setIsLoading(false);
       })
       .catch(() => setIsError(true));
@@ -53,7 +61,10 @@ function App() {
       (story) => item.objectID !== story.objectID
     );
 
-    setStories(newStories);
+    dispatchStories({
+      type: "SET_STORIES",
+      payload: newStories,
+    });
   };
 
   const searchedStories = stories.filter((story) =>
