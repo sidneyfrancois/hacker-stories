@@ -1,7 +1,7 @@
 import List from "./List";
 import InputWithLabel from "./InputWithLabel";
 import useStorageState from "./Hooks/UseStorageState";
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useState, useReducer, useCallback } from "react";
 
 const API_ENDPOINT = "https://hn.algolia.com/api/v1/search?query=";
 
@@ -46,7 +46,7 @@ function App() {
     isError: false,
   });
 
-  useEffect(() => {
+  const handleFetchStories = useCallback(() => {
     if (!searchTerm) return;
 
     dispatchStories({ type: "STORIES_FETCH_INIT" });
@@ -63,6 +63,10 @@ function App() {
         dispatchStories({ type: "STORIES_FETCH_FAILURE" });
       });
   }, [searchTerm]);
+
+  useEffect(() => {
+    handleFetchStories();
+  }, [handleFetchStories]);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
