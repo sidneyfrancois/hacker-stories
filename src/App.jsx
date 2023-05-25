@@ -1,5 +1,5 @@
 import List from "./List";
-import InputWithLabel from "./InputWithLabel";
+import SearchForm from "./SearchForm";
 import useStorageState from "./Hooks/UseStorageState";
 import { useEffect, useState, useReducer, useCallback } from "react";
 import axios from "axios";
@@ -87,22 +87,11 @@ function App() {
     <>
       <h1>My Hacker Stories</h1>
 
-      <form onSubmit={handleSearchSubmit}>
-        <InputWithLabel
-          id="search"
-          value={searchTerm}
-          type="text"
-          onInputChange={handleSearchInput}
-          children
-          isFocused
-        >
-          <strong>Search:</strong>
-        </InputWithLabel>
-
-        <button type="submit" disabled={!searchTerm}>
-          Submit
-        </button>
-      </form>
+      <SearchForm
+        searchTerm={searchTerm}
+        onSearchInput={handleSearchInput}
+        onSearchSubmit={handleSearchSubmit}
+      />
 
       <hr />
 
